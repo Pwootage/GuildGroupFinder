@@ -1,0 +1,115 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
+    <Include file="group.lua" />
+
+    <Button name="PVEFrameTab4" inherits="CharacterFrameTabButtonTemplate" id="4" text="Guild" parent="PVEFrame">
+        <Anchors>
+            <Anchor point="LEFT" relativeTo="PVEFrameTab3" relativePoint="RIGHT">
+                <Offset>
+                    <AbsDimension x="-16" y="0" />
+                </Offset>
+            </Anchor>
+        </Anchors>
+        <Scripts>
+            <OnClick function="GuildGroupFinderTab_OnClick" />
+        </Scripts>
+    </Button>
+
+    <Frame name="GuildGroupFinder_FinderFrame" useParentLevel="true" setAllPoints="true" parent="PVEFrame" hidden="true">
+        <Frames>
+            <Frame name="$parentInset" useParentLevel="true">
+                <Anchors>
+                    <Anchor point="TOPLEFT" x="4" y="-20" />
+                    <Anchor point="BOTTOMRIGHT" x="-4" y="4" />
+                </Anchors>
+            </Frame>
+            <Frame>
+                <Size x="550" y="392" />
+                <Anchors>
+                    <Anchor point="TOPLEFT" x="6" y="-12" />
+                </Anchors>
+                <Frames>
+                    <Frame parentKey="Child">
+                        <Size x="550" y="392" />
+                        <Anchors>
+                            <Anchor point="TOPLEFT" />
+                        </Anchors>
+                        <Layers>
+                            <Layer level="ARTWORK">
+                                <FontString parentKey="ThisWeekLabel" inherits="GameFontNormalHuge" text="Hello, guild finder">
+                                    <Anchors>
+                                        <Anchor point="TOP" y="-25" />
+                                    </Anchors>
+                                    <Color r="1.0" g="1.0" b="1.0" />
+                                    <Shadow>
+                                        <Offset>
+                                            <AbsDimension x="1" y="-1" />
+                                        </Offset>
+                                        <Color r="0" g="0" b="0" />
+                                    </Shadow>
+                                </FontString>
+                            </Layer>
+                            <Layer level="BACKGROUND">
+                                <Texture parentKey="RuneBG" hidden="false" alpha="0.6" alphaMode="BLEND" atlas="ChallengeMode-RuneBG" useAtlasSize="true">
+                                    <Anchors>
+                                        <Anchor point="CENTER" x="-100" y="50" />
+                                    </Anchors>
+                                </Texture>
+                                <Texture parentKey="RunesLarge" hidden="false" alpha="0.08" alphaMode="BLEND" atlas="ChallengeMode-Runes-Large" useAtlasSize="true">
+                                    <Anchors>
+                                        <Anchor point="CENTER" relativeKey="$parent.RuneBG" y="0" />
+                                    </Anchors>
+                                </Texture>
+                                <Texture parentKey="RunesSmall" hidden="false" alpha="0.08" alphaMode="BLEND" atlas="ChallengeMode-Runes-Small" useAtlasSize="true">
+                                    <Anchors>
+                                        <Anchor point="CENTER" relativeKey="$parent.RuneBG" x="-1" y="0" />
+                                    </Anchors>
+                                </Texture>
+                            </Layer>
+                            <Layer level="BACKGROUND" textureSubLevel="1">
+                                <Texture parentKey="LargeRuneGlow" hidden="false" alpha="0" alphaMode="ADD" atlas="ChallengeMode-Runes-GlowLarge" useAtlasSize="true">
+                                    <Anchors>
+                                        <Anchor point="TOPLEFT" y="-2" />
+                                    </Anchors>
+                                </Texture>
+                                <Texture parentKey="SmallRuneGlow" hidden="false" alpha="0" alphaMode="ADD" atlas="ChallengeMode-Runes-GlowSmall" useAtlasSize="true">
+                                    <Anchors>
+                                        <Anchor point="TOPLEFT" x="-1" y="0" />
+                                    </Anchors>
+                                </Texture>
+                            </Layer>
+                        </Layers>
+                    </Frame>
+                </Frames>
+            </Frame>
+        </Frames>
+        <Layers>
+            <Layer level="BACKGROUND" textureSubLevel="1">
+                <Texture parentKey="Background">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativeTo="$parentInset" />
+                        <Anchor point="BOTTOMRIGHT" relativeTo="$parentInset" />
+                    </Anchors>
+                    <TexCoords left="0.365" right="0.636" top="0.352" bottom="0.742" />
+                    <Gradient orientation="VERTICAL">
+                        <MinColor r="0" g="0" b="0" a="0" />
+                        <MaxColor r="1" g="1" b="1" a="0.5" />
+                    </Gradient>
+                </Texture>
+            </Layer>
+            <Layer level="BACKGROUND" textureSubLevel="2">
+                <Texture atlas="insetshadow">
+                    <Size x="549" y="395" />
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativeKey="$parent.Background" x="3" y="-3" />
+                    </Anchors>
+                </Texture>
+            </Layer>
+        </Layers>
+        <Scripts>
+            <!-- <OnLoad function="ChallengesFrame_OnLoad" /> -->
+            <!-- <OnEvent function="ChallengesFrame_OnEvent" /> -->
+            <OnShow function="GuildGroupFinder_FinderFrame_OnShow" />
+            <OnHide function="GuildGroupFinder_FinderFrame_OnHide" />
+        </Scripts>
+    </Frame>
+</Ui>

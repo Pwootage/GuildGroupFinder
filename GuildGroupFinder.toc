@@ -1,0 +1,11 @@
+## Interface: 80300
+## Title: GuildGroupFinder
+## Author: Pwootage
+## Version: 1.0
+## SavedVariables: GroupFinderDB
+
+
+embeds.xml
+
+core.lua
+frames\frames.xml
