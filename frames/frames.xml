@@ -10,11 +10,11 @@
       </Anchor>
     </Anchors>
     <Scripts>
-      <OnClick function="GuildGroupFinderTab_OnClick" />
+      <OnClick function="PVEFrameTab4_OnClick" />
     </Scripts>
   </Button>
 
-  <Frame name="GuildGroupFinder_FinderFrame" useParentLevel="true" setAllPoints="true" parent="PVEFrame" hidden="true">
+  <Frame name="GuildGroupFinder_FinderFrame" mixin="GuildGroupFinder_FinderFrameMixin" useParentLevel="true" setAllPoints="true" parent="PVEFrame" hidden="true">
     <Frames>
       <Frame name="$parentInset" useParentLevel="true">
         <Anchors>
@@ -22,32 +22,27 @@
           <Anchor point="BOTTOMRIGHT" x="-4" y="4" />
         </Anchors>
       </Frame>
-      <Frame>
+      <Slider name="GuildGroupFinder_FinderFrame_Slider" inherits="UIPanelScrollBarTemplate" minValue="0" maxValue="1000" valueStep="1">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeTo="$parentInset" relativePoint="TOPRIGHT" x="-16" y="-20" />
+          <Anchor point="BOTTOMLEFT" relativeTo="$parentInset" relativePoint="BOTTOMRIGHT" x="-16" y="16" />
+        </Anchors>
+        <Scripts>
+          <OnValueChanged function="GuildGroupFinder_FinderFrame_OnValueChanged" />
+        </Scripts>
+      </Slider>
+      <ScrollFrame name="GuildGroupFinder_FinderFrame_ScrollFrame">
         <Size x="550" y="392" />
         <Anchors>
           <Anchor point="TOPLEFT" x="6" y="-12" />
         </Anchors>
-        <Frames>
-          <Frame parentKey="Child">
-            <Size x="550" y="392" />
+        <ScrollChild>
+          <Frame name="GuildGroupFinder_FinderFrame_ScrollChild">
             <Anchors>
               <Anchor point="TOPLEFT" />
+              <Anchor point="TOPRIGHT" />
             </Anchors>
             <Layers>
-              <Layer level="ARTWORK">
-                <FontString parentKey="ThisWeekLabel" inherits="GameFontNormalHuge" text="Hello, guild finder">
-                  <Anchors>
-                    <Anchor point="TOP" y="-25" />
-                  </Anchors>
-                  <Color r="1.0" g="1.0" b="1.0" />
-                  <Shadow>
-                    <Offset>
-                      <AbsDimension x="1" y="-1" />
-                    </Offset>
-                    <Color r="0" g="0" b="0" />
-                  </Shadow>
-                </FontString>
-              </Layer>
               <Layer level="BACKGROUND">
                 <Texture parentKey="RuneBG" hidden="false" alpha="0.6" alphaMode="BLEND" atlas="ChallengeMode-RuneBG" useAtlasSize="true">
                   <Anchors>
@@ -78,11 +73,14 @@
                 </Texture>
               </Layer>
             </Layers>
+            <Scripts>
+              <OnMouseWheel function="GuildGroupFinder_FinderFrame_OnScroll" />
+            </Scripts>
           </Frame>
-        </Frames>
-      </Frame>
+        </ScrollChild>
+      </ScrollFrame>
     </Frames>
-    <Layers>
+    <!-- <Layers>
       <Layer level="BACKGROUND" textureSubLevel="1">
         <Texture parentKey="Background">
           <Anchors>
@@ -96,20 +94,35 @@
           </Gradient>
         </Texture>
       </Layer>
-      <Layer level="BACKGROUND" textureSubLevel="2">
-        <Texture atlas="insetshadow">
-          <Size x="549" y="395" />
+    </Layers> -->
+    <Scripts>
+      <OnLoad>self:OnLoad()</OnLoad>
+      <!-- <OnEvent function="ChallengesFrame_OnEvent" /> -->
+      <OnShow>self:OnShow()</OnShow>
+      <OnHide>self:OnHide()</OnHide>
+    </Scripts>
+  </Frame>
+
+  <Frame name="GuildGroupFinder_PlayerFrameTemplate" useParentLevel="true" virtual="true" hidden="true">
+    <Anchors>
+      <Anchor point="TOPLEFT" x="4" y="4" />
+    </Anchors>
+    <Size x="50" y="50" />
+    <Layers>
+      <Layer level="ARTWORK">
+        <Texture parentKey="RunesSmall" hidden="false" alpha="0.08" alphaMode="BLEND" atlas="ChallengeMode-Runes-Small" useAtlasSize="true">
           <Anchors>
-            <Anchor point="TOPLEFT" relativeKey="$parent.Background" x="3" y="-3" />
+            <Anchor point="CENTER" x="-1" y="0" />
           </Anchors>
         </Texture>
       </Layer>
     </Layers>
-    <Scripts>
-      <!-- <OnLoad function="ChallengesFrame_OnLoad" /> -->
-      <!-- <OnEvent function="ChallengesFrame_OnEvent" /> -->
-      <OnShow function="GuildGroupFinder_FinderFrame_OnShow" />
-      <OnHide function="GuildGroupFinder_FinderFrame_OnHide" />
-    </Scripts>
+    <Frames>
+      <Button name="$parent_button" inherits="UIPanelButtonTemplate" text="Test button">
+        <Anchors>
+          <Anchor point="TOPLEFT" x="0" y="0" />
+        </Anchors>
+      </Button>
+    </Frames>
   </Frame>
 </Ui>

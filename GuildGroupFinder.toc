@@ -4,8 +4,10 @@
 ## Version: 1.0
 ## SavedVariables: GroupFinderDB
 
-
 embeds.xml
 
 core.lua
+comm.lua
+datastore.lua
+options.lua
 frames\frames.xml
