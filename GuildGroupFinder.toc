@@ -7,7 +7,5 @@
 embeds.xml
 
 core.lua
-comm.lua
-datastore.lua
 options.lua
 frames\frames.xml

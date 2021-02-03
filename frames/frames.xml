@@ -1,7 +1,7 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ../../FrameXML/UI.xsd">
   <Include file="group.lua" />
 
-  <Button name="PVEFrameTab4" inherits="CharacterFrameTabButtonTemplate" id="4" text="Guild" parent="PVEFrame">
+  <Button name="PVEFrameTab4B" inherits="CharacterFrameTabButtonTemplate" id="4" text="Guild" parent="PVEFrame">
     <Anchors>
       <Anchor point="LEFT" relativeTo="PVEFrameTab3" relativePoint="RIGHT">
         <Offset>
@@ -13,116 +13,4 @@
       <OnClick function="PVEFrameTab4_OnClick" />
     </Scripts>
   </Button>
-
-  <Frame name="GuildGroupFinder_FinderFrame" mixin="GuildGroupFinder_FinderFrameMixin" useParentLevel="true" setAllPoints="true" parent="PVEFrame" hidden="true">
-    <Frames>
-      <Frame name="$parentInset" useParentLevel="true">
-        <Anchors>
-          <Anchor point="TOPLEFT" x="4" y="-20" />
-          <Anchor point="BOTTOMRIGHT" x="-4" y="4" />
-        </Anchors>
-      </Frame>
-      <Slider name="GuildGroupFinder_FinderFrame_Slider" inherits="UIPanelScrollBarTemplate" minValue="0" maxValue="1000" valueStep="1">
-        <Anchors>
-          <Anchor point="TOPLEFT" relativeTo="$parentInset" relativePoint="TOPRIGHT" x="-16" y="-20" />
-          <Anchor point="BOTTOMLEFT" relativeTo="$parentInset" relativePoint="BOTTOMRIGHT" x="-16" y="16" />
-        </Anchors>
-        <Scripts>
-          <OnValueChanged function="GuildGroupFinder_FinderFrame_OnValueChanged" />
-        </Scripts>
-      </Slider>
-      <ScrollFrame name="GuildGroupFinder_FinderFrame_ScrollFrame">
-        <Size x="550" y="392" />
-        <Anchors>
-          <Anchor point="TOPLEFT" x="6" y="-12" />
-        </Anchors>
-        <ScrollChild>
-          <Frame name="GuildGroupFinder_FinderFrame_ScrollChild">
-            <Anchors>
-              <Anchor point="TOPLEFT" />
-              <Anchor point="TOPRIGHT" />
-            </Anchors>
-            <Layers>
-              <Layer level="BACKGROUND">
-                <Texture parentKey="RuneBG" hidden="false" alpha="0.6" alphaMode="BLEND" atlas="ChallengeMode-RuneBG" useAtlasSize="true">
-                  <Anchors>
-                    <Anchor point="CENTER" x="-100" y="50" />
-                  </Anchors>
-                </Texture>
-                <Texture parentKey="RunesLarge" hidden="false" alpha="0.08" alphaMode="BLEND" atlas="ChallengeMode-Runes-Large" useAtlasSize="true">
-                  <Anchors>
-                    <Anchor point="CENTER" relativeKey="$parent.RuneBG" y="0" />
-                  </Anchors>
-                </Texture>
-                <Texture parentKey="RunesSmall" hidden="false" alpha="0.08" alphaMode="BLEND" atlas="ChallengeMode-Runes-Small" useAtlasSize="true">
-                  <Anchors>
-                    <Anchor point="CENTER" relativeKey="$parent.RuneBG" x="-1" y="0" />
-                  </Anchors>
-                </Texture>
-              </Layer>
-              <Layer level="BACKGROUND" textureSubLevel="1">
-                <Texture parentKey="LargeRuneGlow" hidden="false" alpha="0" alphaMode="ADD" atlas="ChallengeMode-Runes-GlowLarge" useAtlasSize="true">
-                  <Anchors>
-                    <Anchor point="TOPLEFT" y="-2" />
-                  </Anchors>
-                </Texture>
-                <Texture parentKey="SmallRuneGlow" hidden="false" alpha="0" alphaMode="ADD" atlas="ChallengeMode-Runes-GlowSmall" useAtlasSize="true">
-                  <Anchors>
-                    <Anchor point="TOPLEFT" x="-1" y="0" />
-                  </Anchors>
-                </Texture>
-              </Layer>
-            </Layers>
-            <Scripts>
-              <OnMouseWheel function="GuildGroupFinder_FinderFrame_OnScroll" />
-            </Scripts>
-          </Frame>
-        </ScrollChild>
-      </ScrollFrame>
-    </Frames>
-    <!-- <Layers>
-      <Layer level="BACKGROUND" textureSubLevel="1">
-        <Texture parentKey="Background">
-          <Anchors>
-            <Anchor point="TOPLEFT" relativeTo="$parentInset" />
-            <Anchor point="BOTTOMRIGHT" relativeTo="$parentInset" />
-          </Anchors>
-          <TexCoords left="0.365" right="0.636" top="0.352" bottom="0.742" />
-          <Gradient orientation="VERTICAL">
-            <MinColor r="0" g="0" b="0" a="0" />
-            <MaxColor r="1" g="1" b="1" a="0.5" />
-          </Gradient>
-        </Texture>
-      </Layer>
-    </Layers> -->
-    <Scripts>
-      <OnLoad>self:OnLoad()</OnLoad>
-      <!-- <OnEvent function="ChallengesFrame_OnEvent" /> -->
-      <OnShow>self:OnShow()</OnShow>
-      <OnHide>self:OnHide()</OnHide>
-    </Scripts>
-  </Frame>
-
-  <Frame name="GuildGroupFinder_PlayerFrameTemplate" useParentLevel="true" virtual="true" hidden="true">
-    <Anchors>
-      <Anchor point="TOPLEFT" x="4" y="4" />
-    </Anchors>
-    <Size x="50" y="50" />
-    <Layers>
-      <Layer level="ARTWORK">
-        <Texture parentKey="RunesSmall" hidden="false" alpha="0.08" alphaMode="BLEND" atlas="ChallengeMode-Runes-Small" useAtlasSize="true">
-          <Anchors>
-            <Anchor point="CENTER" x="-1" y="0" />
-          </Anchors>
-        </Texture>
-      </Layer>
-    </Layers>
-    <Frames>
-      <Button name="$parent_button" inherits="UIPanelButtonTemplate" text="Test button">
-        <Anchors>
-          <Anchor point="TOPLEFT" x="0" y="0" />
-        </Anchors>
-      </Button>
-    </Frames>
-  </Frame>
 </Ui>
