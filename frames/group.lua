@@ -39,6 +39,17 @@ function GuildGroupFinder:ShowRollUI()
   btn:SetCallback('OnClick', function() GuildGroupFinder:RollClear() end)
   f:AddChild(btn)
 
+  local optionGroup = AceGUI:Create('InlineGroup')
+  optionGroup:SetLayout('Flow')
+  f:AddChild(optionGroup)
+
+  local slider = AceGUI:Create('Slider')
+  slider:SetLabel('Group Size')
+  slider:SetValue(5)
+  slider:SetSliderValues(2, 10, 1)
+  slider:SetCallback('OnMouseUp', function() GuildGroupFinder:SetGroupSize(slider:GetValue()) end)
+  optionGroup:AddChild(slider)
+
   local addGroup = AceGUI:Create('InlineGroup')
   addGroup:SetLayout('Flow')
   f:AddChild(addGroup)
