@@ -8,6 +8,9 @@ function PVEFrameTab4_OnClick(self)
 end
 
 function GuildGroupFinder:ShowRollUI()
+  -- Set below but need access to it for the roll button
+  local slider = AceGUI:Create('Slider')
+
   local f = AceGUI:Create('Frame')
   f:SetCallback('OnClose',function(widget) AceGUI:Release(widget) end)
   f:SetTitle('Group Roll')
@@ -22,10 +25,9 @@ function GuildGroupFinder:ShowRollUI()
 
   local btn = AceGUI:Create('Button')
   btn:SetWidth(250)
-  btn:SetText('Roll (/groll)')
-  btn:SetCallback('OnClick', function() GuildGroupFinder:RollEnd() end)
+  btn:SetText('Roll (/groll <groupSize:optional:>)')
+  btn:SetCallback('OnClick', function() GuildGroupFinder:RollEnd(tostring(slider:GetValue())) end)
   f:AddChild(btn)
-
 
   local btn = AceGUI:Create('Button')
   btn:SetWidth(250)
@@ -43,11 +45,9 @@ function GuildGroupFinder:ShowRollUI()
   optionGroup:SetLayout('Flow')
   f:AddChild(optionGroup)
 
-  local slider = AceGUI:Create('Slider')
   slider:SetLabel('Group Size')
   slider:SetValue(5)
   slider:SetSliderValues(2, 10, 1)
-  slider:SetCallback('OnMouseUp', function() GuildGroupFinder:SetGroupSize(slider:GetValue()) end)
   optionGroup:AddChild(slider)
 
   local addGroup = AceGUI:Create('InlineGroup')

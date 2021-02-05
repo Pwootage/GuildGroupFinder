@@ -37,7 +37,6 @@ function GuildGroupFinder:OnInitialize()
 end
 
 function GuildGroupFinder:OnEnable()
-  self.groupSize = 5
   self.players = {}
   self.currentRoll = {}
   self.rolling = false
@@ -106,8 +105,14 @@ function GuildGroupFinder:RollList()
 
 end
 
-function GuildGroupFinder:RollEnd()
+function GuildGroupFinder:RollEnd(input)
   self.rolling = false
+
+  local groupSize = tonumber(input:match('%d+'))
+  if (groupSize == nil or groupSize < 2 or groupSize > 10) then
+    groupSize = 5
+  end
+
   self:RollList()
   -- make a list table
   local rollList = {}
@@ -121,9 +126,9 @@ function GuildGroupFinder:RollEnd()
     local j = math.random(i)
 		rollList[i], rollList[j] = rollList[j], rollList[i]
   end
-  -- Print names equal to self.groupSize
+  -- Print names equal to groupSize
   local message = 'Group:'
-  for i = 1, math.min(self.groupSize, #rollList) do
+  for i = 1, math.min(groupSize, #rollList) do
     message = message .. ' ' .. rollList[i]
   end
   ChatThrottleLib:SendChatMessage(
@@ -131,10 +136,6 @@ function GuildGroupFinder:RollEnd()
     message,
     'GUILD', nil, nil
   )
-end
-
-function GuildGroupFinder:SetGroupSize(size)
-  self.groupSize = size
 end
 
 function GuildGroupFinder:RegisterPlayer(player)
@@ -155,7 +156,7 @@ function GuildGroupFinder:UnregisterPlayer(player)
   self:Print('Removed ' .. name)
 end
 
-function GuildGroupFinder:RollAdd(input, size)
+function GuildGroupFinder:RollAdd(input)
   for player in input:gmatch('(%S+)%s*') do
     self:RegisterPlayer(player)
   end
